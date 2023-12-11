@@ -1,0 +1,50 @@
+create table tb_mahasiswa(
+	nim int not null,
+	nama varchar(100) not null
+	)
+
+create table tb_subject(
+	subject_id int not null,
+	subject_name varchar(100) not null
+	)
+	
+create table tb_learn(
+	subject_id int not null,
+	nim int not null
+	)
+select * from tb_mahasiswa, tb_subject, tb_learn
+ 
+create type departement_mahasiswa as enum ('PJJ informatika', 'PJJ manajemen', 'PJJ sistem informasi');
+
+alter table tb_mahasiswa
+	add column departement departement_mahasiswa;
+	
+insert into tb_mahasiswa( nim, nama, departement)
+values (31167, 'mari maria', 'PJJ manajemen');
+
+select * from tb_mahasiswa
+
+insert into tb_subject (subject_id, subject_name)
+values (401, 'postgreSQL');
+
+select * from tb_subject
+
+insert into tb_learn (subject_id, nim)
+values (401, 31167);
+
+select * from tb_learn
+
+select tb_learn.nim, nama,departement, tb_learn.subject_id, subject_name
+from tb_learn
+join tb_mahasiswa on tb_learn.nim = tb_mahasiswa.nim
+join tb_subject on tb_learn.subject_id = tb_subject.subject_id;
+
+create role admin1;
+alter role admin1 login password 'rahasia';
+
+start transaction;
+
+<!---
+elsa-ryt/elsa-ryt is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
+You can click the Preview link to take a look at your changes.
+--->
